@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Support\Facades\Auth;
-use  App\User;
 
 class UserController extends Controller
 {
-     /**
+    /**
      * Instantiate a new UserController instance.
      *
      * @return void
@@ -34,7 +34,7 @@ class UserController extends Controller
      */
     public function allUsers()
     {
-         return response()->json(['users' =>  User::all()], 200);
+        return response()->json(['users' => User::all()], 200);
     }
 
     /**
