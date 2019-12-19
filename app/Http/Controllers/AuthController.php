@@ -11,6 +11,13 @@ class AuthController extends Controller
     /**
      * Enregistrer un nouveau user.
      *
+     * C'est ici que l'on va ajouter un nouvel utilisateur grâce à son nom, son email et son mot de passe.
+     *
+     *
+     * @bodyParam  Name  string  Nom de l'utilisateur
+     * @bodyParam  Email  email  L'email de l'utilisateur
+     * @bodyParam  Password  string  Mot de passe entré par l'utilisateur
+     *
      * @param  Request  $request
      * @return Response
      */
@@ -46,12 +53,22 @@ class AuthController extends Controller
     /**
      * Récupérer un token JWT via les informations utilisateurs.
      *
-     * @param  Request  $request
+     * Lorsqu'un utilisateur réussit à ce connecter, nous allons lui retourner un token avec différentes informations.
+     *
+     * @bodyParam  Email  String  L'email entré par l'utilisateur
+     * @bodyParam  Password  String  Mot de passe entré par l'utilisateur
+     *
+     *
+     * @response {
+     *  "token": "token",
+     *  "token_type": "bearer",
+     *  "expire_in": "14400"
+     * }
      * @return Response
      */
     public function login(Request $request)
     {
-        //validate incoming request
+        //Element nécessaire dans la requête
         $this->validate($request, [
             'email' => 'required|string',
             'password' => 'required|string',
@@ -63,6 +80,7 @@ class AuthController extends Controller
             return response()->json(['message' => 'Unauthorized'], 401);
         }
 
+        // Si tout est bon on génère le token
         return $this->respondWithToken($token);
     }
 

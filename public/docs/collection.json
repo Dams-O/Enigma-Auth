@@ -1,0 +1,132 @@
+{
+    "variables": [],
+    "info": {
+        "name": " API",
+        "_postman_id": "7bd2d4b2-6e44-47ac-8a72-a36d08f1998d",
+        "description": "",
+        "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.0.0\/collection.json"
+    },
+    "item": [
+        {
+            "name": "general",
+            "description": "",
+            "item": [
+                {
+                    "name": "Enregistrer un nouveau user.",
+                    "request": {
+                        "url": "http:\/\/localhost\/api\/register",
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"Name\": \"eveniet\",\n    \"Email\": \"aut\",\n    \"Password\": \"assumenda\"\n}"
+                        },
+                        "description": "C'est ici que l'on va ajouter un nouvel utilisateur gr\u00e2ce \u00e0 son nom, son email et son mot de passe.",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "R\u00e9cup\u00e9rer un token JWT via les informations utilisateurs.",
+                    "request": {
+                        "url": "http:\/\/localhost\/api\/login",
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"Email\": \"quod\",\n    \"Password\": \"magnam\"\n}"
+                        },
+                        "description": "Lorsqu'un utilisateur r\u00e9ussit \u00e0 ce connecter, nous allons lui retourner un token avec diff\u00e9rentes informations.",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "R\u00e9cup\u00e9rer le ou les utilisateur(s) connect\u00e9(s)",
+                    "request": {
+                        "url": "http:\/\/localhost\/api\/profile",
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "Cette fonction retourne le nom de l'utilisateur uniquement s'il est connect\u00e9.",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "R\u00e9cup\u00e8re les informations d'un seul utilisateur.",
+                    "request": {
+                        "url": "http:\/\/localhost\/api\/users\/{id}",
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "Cette fonction r\u00e9cup\u00e8re les informations d'un utilisateur gr\u00e2ce \u00e0 son id.",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "R\u00e9cup\u00e8re tous les utilisateurs en base.",
+                    "request": {
+                        "url": "http:\/\/localhost\/api\/users",
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "R\u00e9cup\u00e8re toutes les informations des utilisateurs pr\u00e9sent dans la base de donn\u00e9e.",
+                        "response": []
+                    }
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,313 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API Reference</title>
+
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="js/all.js"></script>
+
+
+    <script>
+        $(function () {
+            setupLanguages(["bash", "javascript"]);
+        });
+    </script>
+</head>
+
+<body class="">
+    <a href="#" id="nav-button">
+        <span>
+            NAV
+            <img src="images/navbar.png" />
+        </span>
+    </a>
+    <div class="tocify-wrapper">
+        <img src="enigma.png" />
+        <div class="lang-selector">
+            <a href="#" data-language-name="bash">bash</a>
+            <a href="#" data-language-name="javascript">javascript</a>
+        </div>
+        <div class="search">
+            <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+        <div id="toc">
+        </div>
+        <ul class="toc-footer">
+            <li><a href='http://github.com/mpociot/documentarian'>Documentation Powered by Documentarian</a></li>
+        </ul>
+    </div>
+    <div class="page-wrapper">
+        <div class="dark-box"></div>
+        <div class="content">
+            <h1>Serveur Authentification</h1>
+            <!-- START_0f8ecc008bbceb798251c0de85808ef8 -->
+            <h2>Enregistrer un nouveau user.</h2>
+            <p>C'est ici que l'on va ajouter un nouvel utilisateur grâce à son nom, son email et son mot de passe.</p>
+            <blockquote>
+                <p>Example request:</p>
+            </blockquote>
+            <pre><code class="language-bash">curl -X POST \
+    "/api/register" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"Name":"eveniet","Email":"aut","Password":"assumenda"}'
+</code></pre>
+            <pre><code class="language-javascript">const url = new URL(
+    "/api/register"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "Name": "eveniet",
+    "Email": "aut",
+    "Password": "assumenda"
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+            <h3>HTTP Request</h3>
+            <p><code>POST /api/register</code></p>
+            <h4>Body Parameters</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Status</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>Name</code></td>
+                        <td>string</td>
+                        <td>optional</td>
+                        <td>Nom de l'utilisateur</td>
+                    </tr>
+                    <tr>
+                        <td><code>Email</code></td>
+                        <td>email</td>
+                        <td>optional</td>
+                        <td>L'email de l'utilisateur</td>
+                    </tr>
+                    <tr>
+                        <td><code>Password</code></td>
+                        <td>string</td>
+                        <td>optional</td>
+                        <td>Mot de passe entré par l'utilisateur</td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- END_0f8ecc008bbceb798251c0de85808ef8 -->
+            <!-- START_b982a9c2785c94e078bbe534a1f12d68 -->
+            <h2>Récupérer un token JWT via les informations utilisateurs.</h2>
+            <p>Lorsqu'un utilisateur réussit à ce connecter, nous allons lui retourner un token avec différentes
+                informations.</p>
+            <blockquote>
+                <p>Example request:</p>
+            </blockquote>
+            <pre><code class="language-bash">curl -X POST \
+    "/api/login" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"Email":"quod","Password":"magnam"}'
+</code></pre>
+            <pre><code class="language-javascript">const url = new URL(
+    "/api/login"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "Email": "quod",
+    "Password": "magnam"
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+            <blockquote>
+                <p>Example response (200):</p>
+            </blockquote>
+            <pre><code class="language-json">{
+    "token": "token",
+    "token_type": "bearer",
+    "expire_in": "14400"
+}</code></pre>
+            <h3>HTTP Request</h3>
+            <p><code>POST /api/login</code></p>
+            <h4>Body Parameters</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Status</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>Email</code></td>
+                        <td>String</td>
+                        <td>optional</td>
+                        <td>L'email entré par l'utilisateur</td>
+                    </tr>
+                    <tr>
+                        <td><code>Password</code></td>
+                        <td>String</td>
+                        <td>optional</td>
+                        <td>Mot de passe entré par l'utilisateur</td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- END_b982a9c2785c94e078bbe534a1f12d68 -->
+            <!-- START_eb9b212776875babfe01f41eb780d3b1 -->
+            <h2>Récupérer le ou les utilisateur(s) connecté(s)</h2>
+            <p>Cette fonction retourne le nom de l'utilisateur uniquement s'il est connecté.</p>
+            <blockquote>
+                <p>Example request:</p>
+            </blockquote>
+            <pre><code class="language-bash">curl -X GET \
+    -G "/api/profile" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+            <pre><code class="language-javascript">const url = new URL(
+    "/api/profile"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+            <blockquote>
+                <p>Example response (200):</p>
+            </blockquote>
+            <pre><code class="language-json">{
+    "user": "Name de l'utilisateur"
+}</code></pre>
+            <h3>HTTP Request</h3>
+            <p><code>GET /api/profile</code></p>
+            <!-- END_eb9b212776875babfe01f41eb780d3b1 -->
+            <!-- START_b1f8ce5c516b48f856fb396b04dfd494 -->
+            <h2>Récupère les informations d&#039;un seul utilisateur.</h2>
+            <p>Cette fonction récupère les informations d'un utilisateur grâce à son id.</p>
+            <blockquote>
+                <p>Example request:</p>
+            </blockquote>
+            <pre><code class="language-bash">curl -X GET \
+    -G "/api/users/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+            <pre><code class="language-javascript">const url = new URL(
+    "/api/users/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+            <blockquote>
+                <p>Example response (200):</p>
+            </blockquote>
+            <pre><code class="language-json">{
+    "Id": "1",
+    "Name": "Olive",
+    "Email": "Olivier@gmail.fr",
+    "Password": "ergerh98egerkjgnerjgne74grjegeirg3"
+}</code></pre>
+            <h3>HTTP Request</h3>
+            <p><code>GET /api/users/{id}</code></p>
+            <!-- END_b1f8ce5c516b48f856fb396b04dfd494 -->
+            <!-- START_511eeadfce956cbeea74ce3763392dcd -->
+            <h2>Récupère tous les utilisateurs en base.</h2>
+            <p>Récupère toutes les informations des utilisateurs présent dans la base de donnée.</p>
+            <blockquote>
+                <p>Example request:</p>
+            </blockquote>
+            <pre><code class="language-bash">curl -X GET \
+    -G "/api/users" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+            <pre><code class="language-javascript">const url = new URL(
+    "/api/users"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+            <blockquote>
+                <p>Example response (200):</p>
+            </blockquote>
+            <pre><code class="language-json">{
+    "Id": "1",
+    "Name": "Test1",
+    "Email": "test@test.fr",
+    "Password": "ergerh98egerkjgnerjgne74grjegeirg3"
+}</code></pre>
+            <blockquote>
+                <p>Example response (200):</p>
+            </blockquote>
+            <pre><code class="language-json">{
+    "Id": "2",
+    "Name": "Test2",
+    "Email": "test2@test.fr",
+    "Password": "ergereiufhzeufh2zdozf7ienf5h98egerkjgnerjgne74grjegeirg3"
+}</code></pre>
+            <h3>HTTP Request</h3>
+            <p><code>GET /api/users</code></p>
+            <!-- END_511eeadfce956cbeea74ce3763392dcd -->
+        </div>
+        <div class="dark-box">
+            <div class="lang-selector">
+                <a href="#" data-language-name="bash">bash</a>
+                <a href="#" data-language-name="javascript">javascript</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

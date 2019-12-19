@@ -7,7 +7,6 @@ use Laravel\Lumen\Routing\Controller as BaseController;
 
 class Controller extends BaseController
 {
-    //
 
     //Méthode globale aux controllers pour token
     protected function respondWithToken($token)
