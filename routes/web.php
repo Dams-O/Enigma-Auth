@@ -17,19 +17,18 @@ $router->get('/', function () use ($router) {
 
 // API route group
 $router->group(['prefix' => 'api'], function () use ($router) {
-    // Matches "/api/register
-   $router->post('register', 'AuthController@register');
+    // Route d enregistrement "/api/register
+    $router->post('register', 'AuthController@register');
 
-     // Route d authentification /api/login
+     // Route d authentification "/api/login
     $router->post('login', 'AuthController@login');
 
-    /*// Matches "/api/profile
+    // Route qui retourne profil "/api/profile
     $router->get('profile', 'UserController@profile');
 
-    // Matches "/api/users/1 
-    //get one user by id
+    // Retourne un utilisateur par id "/api/users/1 
     $router->get('users/{id}', 'UserController@singleUser');
     
-    // Matches "/api/users
-    $router->get('users', 'UserController@allUsers');*/
+    // Retourne toute la liste des utilisateurs "/api/users
+    $router->get('users', 'UserController@allUsers');
 });
