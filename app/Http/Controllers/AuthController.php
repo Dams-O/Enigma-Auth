@@ -72,16 +72,26 @@ class AuthController extends Controller
         $this->validate($request, [
             'email' => 'required|string',
             'password' => 'required|string',
+            'codesecu' => 'required|string'
         ]);
 
         $credentials = $request->only(['email', 'password']);
+        $codesecu = $request->only(['codesecu']);
 
         if (!$token = Auth::attempt($credentials)) {
-            return response()->json(['message' => 'Unauthorized'], 401);
+            return response()->json(['message' => 'Mauvais identifiant au mot de passe'], 401);
         }
-
-        // Si tout est bon on génère le token
-        return $this->respondWithToken($token);
+        // Si les credentials sont bons on teste le code de sécurité
+        if ($codesecu['codesecu'] == 'lecodedesecuclientserveur') {
+            // Si tout est bon on génère le token
+            return $this->respondWithToken($token);
+        }
+        else{
+            // Retourne cette erreur si le code de sécurité est erroné
+            return response()->json(['message' => 'Code de securite errone'], 401);
+        }
+        // Retour en cas d'autre erreur
+        return response()->json(['message' => 'Erreur non identifié'], 401);
     }
 
 }
